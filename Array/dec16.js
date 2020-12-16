@@ -40,12 +40,26 @@ const expected3 = [1, 2, 3, 4];
 //   return newarr;
 // }
 
-function removeDuplicates(nums) {
-  let val = nums[0], idx = 1;
+// function removeDuplicates(nums) {
+//   let val = nums[0], idx = 1;
+//   for (let i = 1; i < nums.length; i++) {
+//     if (nums[i] != val) {
+//       nums[idx] = nums[i];
+//       val = nums[i];
+//       idx += 1;
+//     }
+//   }
+//   nums.length = idx;
+//   return nums;
+// }
+
+function removeDuplicates2(nums) {
+  let obj = {}, idx = 1;
+  obj[nums[0]] = 1;
   for (let i = 1; i < nums.length; i++) {
-    if (nums[i] != val) {
+    if (!obj.hasOwnProperty(nums[i])) {
+      obj[nums[i]] = 1;
       nums[idx] = nums[i];
-      val = nums[i];
       idx += 1;
     }
   }
@@ -60,3 +74,4 @@ console.log(removeDuplicates(nums3));
 
 
 /*****************************************************************************/
+
