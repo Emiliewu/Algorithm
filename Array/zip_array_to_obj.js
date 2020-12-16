@@ -42,9 +42,7 @@ console.log(zipArraysIntoMap(keys1, vals1));
 module.exports = { zipArraysIntoMap };
 
 /*****************************************************************************/
-Instructor_SadieF今天08:54
-Algo 2:
-/* 
+
   Invert Hash
   A hash table / hash map is an obj / dictionary
   Given an object / dict,
