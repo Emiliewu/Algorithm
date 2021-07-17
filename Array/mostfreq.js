@@ -69,3 +69,26 @@ console.log(kMostFrequent(nums1, k1));
 console.log(kMostFrequent(nums2, k2));
 console.log(kMostFrequent(nums3, k3));
 console.log(kMostFrequent(nums4, k4));
+
+function kMostFrequent2(nums, k) {
+  let obj = {}, freqObj = {}, result = [];
+  for (let n of nums) {
+    obj[n] ? obj[n]+=1 : obj[n]=1;
+  }
+  for (let k of Object.keys(obj)) {
+    freqObj[obj[k]] ? freqObj[obj[k]].push(+k) : freqObj[obj[k]]=[+k];
+  }
+  let freqArr = Object.values(freqObj);
+  for (let i = freqArr.length-1; i >= 0; i--) {
+    k -= freqArr[i].length;
+    if (k < 0) return [];
+    result.push(...freqArr[i]);
+    if (k === 0) return result;
+  }
+  return result;
+}
+
+console.log(kMostFrequent2(nums1, k1));
+console.log(kMostFrequent2(nums2, k2));
+console.log(kMostFrequent2(nums3, k3));
+console.log(kMostFrequent2(nums4, k4));
