@@ -36,13 +36,22 @@ const expected3 = [1, 2, 3];
 function kMostFrequent(nums, k) {
   let result = [];
   let dicobj = {};
+  let idx = 0;
   for (let i = 0; i < nums.length; i ++) {
     dicobj[nums[i]] === undefined ? dicobj[nums[i]] = 1 : dicobj[nums[i]] += 1;
+    nums[i] > idx ? idx = nums[i] : idx = idx;
   }
   console.log(dicobj);
   for (let key in dicobj) {
-    if(dicobj[key] <= k) {
+    if(dicobj[key] === idx && k > 0) {
       result.push(key);
+      k--;
+    } else if (dicobj[key] < idx && k > 0 ) {
+      idx--;
+      if(dicobj[key] === idx && k > 0) {
+        result.push(key);
+        k--;
+      } 
     }
   }
   return result;
