@@ -18,6 +18,10 @@ const expected2 = [0];
 const nums3 = [1, 1, 2, 2, 3, 3];
 const k3 = 3;
 const expected3 = [1, 2, 3];
+
+const nums4 = [7, 7, 8, 8, 9, 9];
+const k4 = 3;
+const expected4 = [7, 8, 9];
 /* 
   Explanation: 3 is the only value that would be passed in for k because it is the only value for k that has
   a valid solution. Since 1, 2, and 3, all occur 3 times, they are all the most frequent ints, so there is no
@@ -39,19 +43,23 @@ function kMostFrequent(nums, k) {
   let idx = 0;
   for (let i = 0; i < nums.length; i ++) {
     dicobj[nums[i]] === undefined ? dicobj[nums[i]] = 1 : dicobj[nums[i]] += 1;
-    nums[i] > idx ? idx = nums[i] : idx = idx;
+    dicobj[nums[i]] > idx ? idx = dicobj[nums[i]] : idx = idx;
   }
-  console.log(dicobj);
-  for (let key in dicobj) {
-    if(dicobj[key] === idx && k > 0) {
-      result.push(key);
-      k--;
-    } else if (dicobj[key] < idx && k > 0 ) {
-      idx--;
-      if(dicobj[key] === idx && k > 0) {
-        result.push(key);
+  while(k > 0) {
+    for (let key in dicobj) {
+      if (dicobj[key] === idx && k > 0) {
+        result.push(+key);
         k--;
-      } 
+      }
+    }
+    while(k > 0) {
+      idx--;
+      for (let key in dicobj) {
+        if (dicobj[key] === idx && k > 0) {
+          result.push(+key);
+          k--;
+        }
+      }
     }
   }
   return result;
@@ -60,4 +68,4 @@ function kMostFrequent(nums, k) {
 console.log(kMostFrequent(nums1, k1));
 console.log(kMostFrequent(nums2, k2));
 console.log(kMostFrequent(nums3, k3));
-
+console.log(kMostFrequent(nums4, k4));
