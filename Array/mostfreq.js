@@ -37,30 +37,23 @@ const expected4 = [7, 8, 9];
  * @param {number} k Represents the amount of numbers that should be returned.
  * @returns {Array<number>} The k most frequently occurring numbers.
  */
-function kMostFrequent(nums, k) {
+ function kMostFrequent(nums, k) {
   let result = [];
   let dicobj = {};
   let idx = 0;
   for (let i = 0; i < nums.length; i ++) {
     dicobj[nums[i]] === undefined ? dicobj[nums[i]] = 1 : dicobj[nums[i]] += 1;
-    dicobj[nums[i]] > idx ? idx = dicobj[nums[i]] : idx = idx;
+    if (dicobj[nums[i]] > idx) idx = dicobj[nums[i]];
   }
-  while(k > 0) {
+  while(k > 0 && idx > 0) {
     for (let key in dicobj) {
-      if (dicobj[key] === idx && k > 0) {
+      if (dicobj[key] === idx) {
         result.push(+key);
         k--;
       }
     }
-    while(k > 0) {
-      idx--;
-      for (let key in dicobj) {
-        if (dicobj[key] === idx && k > 0) {
-          result.push(+key);
-          k--;
-        }
-      }
-    }
+    if (k < 0) return [];
+    idx--;
   }
   return result;
 }
